@@ -2,6 +2,7 @@
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 /* Errors */
 
@@ -20,6 +21,15 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
     bool public isPaused = false;
     bool public isRevealed = true;
     string public notRevealedUri;
+
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        uint256 _cost
+    ) ERC721(_name, _symbol) {
+        cost = _cost;
+        timeDeployed = block.timestamp;
+    }
 
     /* Events */
 
