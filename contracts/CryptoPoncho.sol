@@ -33,6 +33,23 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
 
     /* Events */
 
+    // Only Owner Functions
+    function setIsRevealed(bool _state) public onlyOwner {
+        isRevealed = _state;
+    }
+
+    function setCost(uint256 _newCost) public onlyOwner {
+        cost = _newCost;
+    }
+
+    function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
+        maxMintAmount = _newmaxMintAmount;
+    }
+
+    function setNotRevealedURI(string memory _notRevealedURI) public onlyOwner {
+        notRevealedUri = _notRevealedURI;
+    }
+
     function setBaseURI(string memory _newBaseURI) public onlyOwner {
         baseURI = _newBaseURI;
     }
@@ -42,6 +59,17 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
         onlyOwner
     {
         baseExtension = _newBaseExtension;
+    }
+
+    function setIsPaused(bool _state) public onlyOwner {
+        isPaused = _state;
+    }
+
+    function withdraw() public payable onlyOwner {
+        (bool success, ) = payable(msg.sender).call{
+            value: address(this).balance
+        }("");
+        require(success);
     }
 
     /* View / Pure functions */
