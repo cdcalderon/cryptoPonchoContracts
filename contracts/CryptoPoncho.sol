@@ -33,6 +33,14 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
 
     /* Events */
 
+    function getSecondsUntilMinting() public view returns (uint256) {
+        if (block.timestamp < timeDeployed + allowMintingAfter) {
+            return (timeDeployed + allowMintingAfter) - block.timestamp;
+        } else {
+            return 0;
+        }
+    }
+
     // Only Owner Functions
     function setIsRevealed(bool _state) public onlyOwner {
         isRevealed = _state;
