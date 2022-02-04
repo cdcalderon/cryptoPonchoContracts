@@ -41,6 +41,11 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
         }
     }
 
+    // internal
+    function _baseURI() internal view virtual override returns (string memory) {
+        return baseURI;
+    }
+
     // Only Owner Functions
     function setIsRevealed(bool _state) public onlyOwner {
         isRevealed = _state;
