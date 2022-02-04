@@ -33,6 +33,18 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
 
     /* Events */
 
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        virtual
+        override
+        returns (string memory)
+    {
+        if (isRevealed == false) {
+            return notRevealedUri;
+        }
+    }
+
     function getSecondsUntilMinting() public view returns (uint256) {
         if (block.timestamp < timeDeployed + allowMintingAfter) {
             return (timeDeployed + allowMintingAfter) - block.timestamp;
@@ -84,6 +96,4 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
         }("");
         require(success);
     }
-
-    /* View / Pure functions */
 }
