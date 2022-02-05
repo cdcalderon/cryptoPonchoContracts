@@ -40,9 +40,16 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
         override
         returns (string memory)
     {
+        require(
+            _exists(tokenId),
+            "ERC721Metadata: URI query for nonexistent token"
+        );
+
         if (isRevealed == false) {
             return notRevealedUri;
         }
+
+        string memory currentBaseURI = _baseURI();
     }
 
     function getSecondsUntilMinting() public view returns (uint256) {
