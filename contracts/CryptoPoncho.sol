@@ -50,6 +50,16 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
         }
 
         string memory currentBaseURI = _baseURI();
+        return
+            bytes(currentBaseURI).length > 0
+                ? string(
+                    abi.encodePacked(
+                        currentBaseURI,
+                        tokenId.toString(),
+                        baseExtension
+                    )
+                )
+                : "";
     }
 
     function getSecondsUntilMinting() public view returns (uint256) {
