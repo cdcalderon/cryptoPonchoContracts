@@ -25,10 +25,22 @@ contract CryptoPoncho is ERC721Enumerable, Ownable {
     constructor(
         string memory _name,
         string memory _symbol,
-        uint256 _cost
+        uint256 _cost,
+        uint256 _maxSupply,
+        uint256 _allowMintingOn,
+        string memory _initBaseURI,
+        string memory _initNotRevealedUri
     ) ERC721(_name, _symbol) {
+        if (_allowMintingOn > block.timestamp) {
+            allowMintingAfter = _allowMintingOn - block.timestamp;
+        }
+
         cost = _cost;
+        maxSupply = _maxSupply;
         timeDeployed = block.timestamp;
+
+        setBaseURI(_initBaseURI);
+        setNotRevealedURI(_initNotRevealedUri);
     }
 
     /* Events */
