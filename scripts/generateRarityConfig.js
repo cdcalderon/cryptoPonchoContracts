@@ -16,6 +16,24 @@ const getLayers = async (_layerType = null) => {
     });
 };
 
+const generateConfig = async () => {
+  const layers = [];
+
+  for (var i = 0; i < config.layers.length; i++) {
+    const attributes = await getLayers(config.layers[i]);
+
+    for (var j = 0; j < attributes.length; j++) {
+      attributes.forEach((attribute) => {
+        attribute.weight = 10;
+      });
+    }
+  }
+
+  let rarityData = { layers };
+
+  saveConfig(rarityData);
+};
+
 const saveConfig = (_config) => {
   fs.writeFileSync(
     `${base}/settings/rarity.json`,
