@@ -16,6 +16,13 @@ const getLayers = async (_layerType = null) => {
     });
 };
 
+const saveConfig = (_config) => {
+  fs.writeFileSync(
+    `${base}/settings/rarity.json`,
+    JSON.stringify(_config, null, 2)
+  );
+};
+
 const main = async () => {
   await generateConfig();
 };
