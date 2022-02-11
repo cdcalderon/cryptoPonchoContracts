@@ -27,6 +27,13 @@ const generateConfig = async () => {
         attribute.weight = 10;
       });
     }
+
+    let metadata = {};
+
+    metadata.name = config.layers[i];
+    metadata.attributes = attributes;
+
+    layers.push(metadata);
   }
 
   let rarityData = { layers };
